@@ -1,5 +1,4 @@
 from __future__ import annotations
-from sk_general import modeling as modeling_utils
 from typing import Type
 from sklearn import dummy
 
@@ -9,25 +8,25 @@ from pandas.testing import assert_frame_equal, assert_series_equal
 import pytest
 
 
-
+from sk_general.model import modeling, typing
 
 class TestModelInterface:
 
     def test_model_load_with_class(self) -> None:
-        model = modeling_utils.Model(model_class=dummy.DummyRegressor, instantiate=True)
+        model = modeling.Model(model_class=dummy.DummyRegressor, instantiate=True)
         assert isinstance(model.model_object, dummy.DummyRegressor)
 
     def test_model_load_with_object(self) -> None:
-        model = modeling_utils.Model(model_object=dummy.DummyRegressor())
+        model = modeling.Model(model_object=dummy.DummyRegressor())
         assert isinstance(model.model_object, dummy.DummyRegressor)
 
     def test_model_instantiation(self) -> None:
-        model = modeling_utils.Model(model_class=dummy.DummyRegressor, instantiate=False)
+        model = modeling.Model(model_class=dummy.DummyRegressor, instantiate=False)
         model.instantiate()
         assert isinstance(model.model_object, dummy.DummyRegressor)
 
     def test_model_instantiation_with_kwargs(self) -> None:
-        model = modeling_utils.Model(
+        model = modeling.Model(
             model_class=dummy.DummyRegressor,
             instantiate=True,
             model_params={"strategy": "mean"},
@@ -35,7 +34,7 @@ class TestModelInterface:
         assert model.model_object.strategy == "mean"
     
     def test_model_instantiation_with_init_params(self) -> None:
-        model = modeling_utils.Model(
+        model = modeling.Model(
             model_class=dummy.DummyRegressor,
             instantiate=True,
             strategy="mean",
@@ -44,11 +43,11 @@ class TestModelInterface:
             
     @pytest.mark.skip(reason="Not implemented")
     def test_model_train():
-        model = modeling_utils.Model(model_class=dummy.DummyRegressor, instantiate=True, )
+        model = modeling.Model(model_class=dummy.DummyRegressor, instantiate=True, )
         model.train(X_train=pd.DataFrame({"a": [1, 2, 3]}), y_train=pd.Series([1, 2, 3]))
         assert isinstance(model.model_object, dummy.DummyRegressor)
 
-dummy.DummyRegressor().fit()
+# dummy.DummyRegressor().fit()
 
 # def test_inheritance():
 #     class TestFitter:
