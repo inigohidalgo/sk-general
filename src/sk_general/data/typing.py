@@ -1,5 +1,5 @@
-from typing import Union, Protocol, Number, TypeVar, Literal, Mapping, Any
-
+from typing import Union, Protocol, TypeVar, Literal, Mapping, Any
+from numbers import Number
 KeyTs = Union[Number, str]
 KeyT = TypeVar("KeyT", bound=KeyTs)
 

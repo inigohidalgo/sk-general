@@ -28,6 +28,7 @@ from typing import MutableMapping
 
 from ..data.data_processing import (
     extract_target_from_df,
+    DataHandler
 )
 
 from .typing import AbstractModel, ModelT, ModelCls, ModelCfg, ModelCfgMapping
@@ -35,7 +36,7 @@ from .typing import AbstractModel, ModelT, ModelCls, ModelCfg, ModelCfgMapping
 from ..data.typing import (
     KeyT,
     KeyTs,
-    DataHandler,
+    AbstractDataHandler,
     DataHandlingModeT,
     DataT
 )

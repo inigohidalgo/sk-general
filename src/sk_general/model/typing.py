@@ -1,5 +1,5 @@
-from typing import Union, Number, TypeVar, Mapping, Any, Protocol, runtime_checkable
-
+from typing import Union, TypeVar, Mapping, Any, Protocol, runtime_checkable
+from numbers import Number
 from ..data.typing import KeyT
 
 ModelCfg = Mapping[str, Any]
