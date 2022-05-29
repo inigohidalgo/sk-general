@@ -152,12 +152,12 @@ class DataHandler:
         self,
         input_type: Optional[str] = None,
         output_type: Optional[str] = None,
-        transformation_type: Optional[str] = None,
+        processing_type: Optional[str] = None,
         converters: Optional[Dict[Tuple[str, str], Callable]] = None,
         verifiers: Optional[Dict[str, Callable[[Any], bool]]] = None,
         transformers: Optional[Iterable[Callable]] = None
     ) -> None:
-        self.data_status = DataStatus(input_type, output_type, transformation_type, input_type)
+        self.data_status = DataStatus(input_type, output_type, processing_type, input_type)
         self.add_operations(converters=converters, verifiers=verifiers, transformers=transformers)
 
 
@@ -182,22 +182,29 @@ class DataHandler:
                 self.operations.transformers = new_operations["transformers"]
             else:
                 self.operations.transformers.extend(new_operations["transformers"])
-
-    def receive_data(self, data) -> None:
-        if self.verify_input_type(data):
-            data = self.convert_data(data, self.data_status.input_type, self.data_status.transformation_type)
-            self.data = data
-            self.data_status.current_type = self.data_status.transformation_type
-        else:
-            raise TypeError(f"Incorrect input type: {type(data)}, ")
-
-    def verify_input_type(self, data: Any, default: bool = False) -> bool:
-        if self.data_status.input_type:
-            return self.operations.verifiers[self.input_type](data)
+    
+    def verify_data_type(self, data, data_type: str, default: bool = False) -> bool:
+        if data_type in self.operations.verifiers:
+            return self.operations.verifiers[data_type](data)
         else:
             choice = 'correct' if default else 'wrong'
-            log.debug(f"No input checking, assuming {choice} input type")
+            log.debug(f"No type checking, assuming {choice} input type")
             return default
+    
+    def receive_data(self, data) -> None:
+        if self.verify_data_type(data, self.data_status.input_type):
+            self.data = data
+            if self.data_status.input_type:
+                self.data_status.current_type = self.data_status.input_type
+            self.data = self.convert_data(self.data, self.data_status.current_type, self.data_status.processing_type)
+            if self.data_status.processing_type:
+                self.data_status.current_type = self.data_status.processing_type
+
+        else:
+            raise TypeError(f"Incorrect input type: {type(data)}, ")
+    
+
+            
 
     def emit_data(self, **emit_kwargs) -> None:
         return self.convert_data(self.data, self.data_status.current_type, self.data_status.output_type, **emit_kwargs)
@@ -206,10 +213,10 @@ class DataHandler:
         if self.operations.transformers:
             for transformer in self.operations.transformers:
                 self.data = transformer(self.data)
-            self.data_status.current_type = self.data_status.transformation_type
+            self.data_status.current_type = self.data_status.processing_type
 
     def __call__(self, data: Any, **kwargs):
-        self.receive_data(data, **kwargs.get("receive_kwargs"))
-        self.transform_data(**kwargs.get("transform_kwargs"))
-        return self.emit_data(**kwargs.get("emit_kwargs"))
+        self.receive_data(data, **kwargs.get("receive_kwargs", {}))
+        self.transform_data(**kwargs.get("transform_kwargs", {}))
+        return self.emit_data(**kwargs.get("emit_kwargs", {}))
 
