@@ -58,24 +58,25 @@ class TestDataHandler:
         assert test_handler.data == input_data and test_handler.data_status.current_type == "iter"    
     
     @pytest.mark.parametrize(
-        "input_type, input",(
-        ("iter", {"a":"b"}), # TODO: dict passing for iterable? may be right
-        ("dict", [1, 2]))
+        "input_type, input",
+        (
+            ("iter", {"a":"b"}), # TODO: dict passing for iterable? may be right
+            ("iter", 3),
+            ("dict", [1, 2]),
+
+        )
     )
-    def test_receive_wrong_data(self, input_type, input):
+    def test_receive_wrong_data(self, input_type, input): 
+        # todo: single test to make sure function is receiving data right
+        # and extract rest of tests to only test each verifier
         test_handler = data_processing.DataHandler(input_type=input_type)
         with pytest.raises(TypeError):
             test_handler.receive_data(input)
         
     
     def test_convert_data(self):
+        input_data = [1, 2]
         test_handler = data_processing.DataHandler(input_type="iter", output_type="dict")
         output_data = test_handler(input_data)
         expected_output_data = {0: 1, 1: 2}
         assert output_data == expected_output_data
-
-test_handler = data_processing.DataHandler(input_type="iter", output_type="dict")
-input_data = [1, 2]
-output_data = test_handler(input_data)
-expected_output_data = {0: 1, 1: 2}
-assert output_data == expected_output_data
