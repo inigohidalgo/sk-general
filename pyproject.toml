@@ -1,0 +1,12 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "sk_general"
+authors = [{name = "Iñigo Hidalgo", email = "inigohrey@gmail.com"}]
+readme = "README.md"
+dynamic = ["version", "description"]
+
+[project.urls]
+Home = "https://inigohidalgo.com/sk_general"
