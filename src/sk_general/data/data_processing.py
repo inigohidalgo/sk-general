@@ -129,6 +129,7 @@ def get_base_verifiers():
     }
     return verifiers
 
+# todo: extract functionality from datahandler?
 @dataclass
 class DataConversionDispatch:
     converters: Dict[Tuple[str, str], Callable] = field(default_factory=get_base_converters)
@@ -171,6 +172,7 @@ class DataHandler:
             return data
 
     def add_operations(self, **new_operations):
+        # todo: extract functionality to DataConversionDispatch?
         if new_operations.get("converters"):
             self.operations.converters.update(new_operations["converters"])
         
