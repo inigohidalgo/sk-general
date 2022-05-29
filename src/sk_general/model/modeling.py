@@ -21,8 +21,7 @@ from typing import (
 
 import numpy as np
 import pandas as pd
-from sklearn import ensemble as sk_ensemble  # type: ignore
-from sklearn import linear_model as sk_lm
+
 from numpy.typing import ArrayLike
 from typing import MutableMapping
 
