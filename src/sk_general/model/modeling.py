@@ -42,18 +42,6 @@ from ..data.typing import (
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-
-
-
-
-
-
-
-
-
-
-
-
 # DataHandler = Callable[[DataT, str, Optional[Mapping]], DataT]
 
 
