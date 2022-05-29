@@ -7,6 +7,25 @@ name = "sk_general"
 authors = [{name = "Iñigo Hidalgo", email = "inigohrey@gmail.com"}]
 readme = "README.md"
 dynamic = ["version", "description"]
+dependencies = [
+    "pandas",
+    "numpy",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "scikit-learn", # for testing functionality with simple models
+]
+
 
 [project.urls]
 Home = "https://inigohidalgo.com/sk_general"
+
+
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "warning"
