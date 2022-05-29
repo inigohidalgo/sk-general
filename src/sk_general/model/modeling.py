@@ -59,7 +59,7 @@ logger.setLevel(logging.DEBUG)
 
 class Model(Generic[ModelT]):
     """
-    A model wrapper implementing unified interface.
+    A model wrapper implementing unified scikit-learn-like interface.
     """
 
     def __init__(
