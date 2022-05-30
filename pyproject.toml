@@ -35,4 +35,4 @@ log_cli = true
 log_cli_level = "warning"
 
 [tool.mypy]
-disallow_untyped_defs = true
+disallow_incomplete_defs = true
