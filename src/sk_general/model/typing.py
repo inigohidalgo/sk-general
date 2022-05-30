@@ -17,5 +17,6 @@ class AbstractModel(Protocol):
     def set_params(self, **params):
         ...
 
+
 ModelT = TypeVar("ModelT", bound=AbstractModel)
 ModelCls = TypeVar("ModelCls")

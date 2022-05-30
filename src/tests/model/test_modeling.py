@@ -10,8 +10,8 @@ import pytest
 
 from sk_general.model import modeling, typing
 
-class TestModelInterface:
 
+class TestModelInterface:
     def test_model_load_with_class(self) -> None:
         model = modeling.Model(model_class=dummy.DummyRegressor, instantiate=True)
         assert isinstance(model.model_object, dummy.DummyRegressor)
@@ -32,7 +32,7 @@ class TestModelInterface:
             model_params={"strategy": "mean"},
         )
         assert model.model_object.strategy == "mean"
-    
+
     def test_model_instantiation_with_init_params(self) -> None:
         model = modeling.Model(
             model_class=dummy.DummyRegressor,
@@ -40,12 +40,18 @@ class TestModelInterface:
             strategy="mean",
         )
         assert model.model_object.strategy == "mean"
-            
+
     @pytest.mark.skip(reason="Not implemented")
     def test_model_train():
-        model = modeling.Model(model_class=dummy.DummyRegressor, instantiate=True, )
-        model.train(X_train=pd.DataFrame({"a": [1, 2, 3]}), y_train=pd.Series([1, 2, 3]))
+        model = modeling.Model(
+            model_class=dummy.DummyRegressor,
+            instantiate=True,
+        )
+        model.train(
+            X_train=pd.DataFrame({"a": [1, 2, 3]}), y_train=pd.Series([1, 2, 3])
+        )
         assert isinstance(model.model_object, dummy.DummyRegressor)
+
 
 # dummy.DummyRegressor().fit()
 

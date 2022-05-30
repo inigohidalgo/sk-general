@@ -25,20 +25,11 @@ import pandas as pd
 from numpy.typing import ArrayLike
 from typing import MutableMapping
 
-from ..data.data_processing import (
-    extract_target_from_df,
-    DataHandler
-)
+from ..data.data_processing import extract_target_from_df, DataHandler
 
 from .typing import AbstractModel, ModelT, ModelCls, ModelCfg, ModelCfgMapping
 
-from ..data.typing import (
-    KeyT,
-    KeyTs,
-    AbstractDataHandler,
-    DataHandlingModeT,
-    DataT
-)
+from ..data.typing import KeyT, KeyTs, AbstractDataHandler, DataHandlingModeT, DataT
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -95,7 +86,9 @@ class Model(Generic[ModelT]):
         if self.__instantiated:
             self.model_object.set_params(**kwargs)
 
-    def handle_data(self, data: DataT, mode: DataHandlingModeT, **kwargs: Dict[str, Any]) -> DataT:
+    def handle_data(
+        self, data: DataT, mode: DataHandlingModeT, **kwargs: Dict[str, Any]
+    ) -> DataT:
 
         for data_handler in self.data_handlers:
             data = data_handler(data, mode, **kwargs)
@@ -187,12 +180,17 @@ class MultiModel(MutableMapping):
         if not self.__instantiated:
             self.model_objects = {}
             for target_name, model_class in self.model_classes.items():
-                model_init_kwargs = {**self.model_params[target_name], **additional_model_init_kwargs}
+                model_init_kwargs = {
+                    **self.model_params[target_name],
+                    **additional_model_init_kwargs,
+                }
                 self.target_model_objects[target_name] = model_class(
                     **model_init_kwargs,
                 )
         else:
-            logger.info("Model objects already instantiated, updating params with additional_model_init_kwargs")
+            logger.info(
+                "Model objects already instantiated, updating params with additional_model_init_kwargs"
+            )
             for target_name, model_object in self.model_objects.items():
                 model_params = additional_model_init_kwargs[target_name]
                 model_object.set_params(model_params)
