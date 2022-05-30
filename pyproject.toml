@@ -13,7 +13,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+
 test = [
+    "black",
+    "flake8",
+    "tox",
     "pytest",
     "pytest-cov",
     "mypy",
@@ -29,3 +33,6 @@ Home = "https://inigohidalgo.com/sk_general"
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "warning"
+
+[tool.mypy]
+disallow_untyped_defs = true
