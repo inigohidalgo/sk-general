@@ -1,4 +1,6 @@
-# scikit-general
+**************
+scikit-general
+**************
 
 .. image:: https://github.com/inigohidalgo/sk-general/workflows/CI/badge.svg?branch=master
      :target: https://github.com/inigohidalgo/sk-general/actions?workflow=CI
