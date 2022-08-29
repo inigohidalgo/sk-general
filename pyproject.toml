@@ -3,7 +3,7 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "sk_general"
+name = "scikit-general"
 authors = [{name = "Iñigo Hidalgo", email = "inigohrey@gmail.com"}]
 readme = "README.md"
 dynamic = ["version", "description"]
@@ -11,6 +11,9 @@ dependencies = [
     "pandas",
     "numpy",
 ]
+
+[tool.flit.module]
+name = "skgen"
 
 [project.optional-dependencies]
 
