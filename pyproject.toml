@@ -11,11 +11,13 @@ dependencies = [
     "pandas",
     "numpy",
 ]
+requires-python = ">=3.8"
 
 [tool.flit.module]
 name = "skgen"
 
-[project.optional-dependencies]
+# [project.optional-dependencies]
+[tool.pdm.dev-dependencies]
 
 test = [
     "black",
@@ -27,6 +29,8 @@ test = [
     "scikit-learn", # for testing functionality with simple models
 ]
 
+[tool.pdm]
+version = { source = "file", path = "src/skgen/__about__.py" }
 
 [project.urls]
 Home = "https://inigohidalgo.com/sk_general"
