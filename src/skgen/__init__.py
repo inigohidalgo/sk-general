@@ -3,4 +3,3 @@ A collection of packages, functions and classes used for deploying models in a u
 Following sklearn API conventions.
 """
 
-__version__ = "0.0.2"
