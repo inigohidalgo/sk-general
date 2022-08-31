@@ -32,4 +32,4 @@ jobs:
 
 
       - name: "Run tox targets for ${{ matrix.python-version }}"
-        run: "pdm run pytest tests/"
+        run: "pdm run pytest src/tests/"
