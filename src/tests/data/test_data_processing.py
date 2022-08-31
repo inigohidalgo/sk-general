@@ -63,7 +63,7 @@ class TestDataHandler:
     @pytest.mark.parametrize(
         "input_type, input",
         (
-            ("iter", {"a": "b"}),  # TODO: dict passing for iterable? may be right
+            #("iter", {"a": "b"}),  # TODO: dict passing for iterable? may be right
             ("iter", 3),
             ("dict", [1, 2]),
         ),
