@@ -1,5 +1,5 @@
 import pytest
-from sk_general.data import data_processing
+from skgen.data import data_processing
 
 
 class TestHelpers:

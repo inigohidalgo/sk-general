@@ -8,7 +8,7 @@ from pandas.testing import assert_frame_equal, assert_series_equal
 import pytest
 
 
-from sk_general.model import modeling, typing
+from skgen.model import modeling, typing
 
 
 class TestModelInterface:
