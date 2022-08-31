@@ -1,5 +1,5 @@
 import pytest
-from sk_general.data import data_processing
+from skgen.data import data_processing
 
 
 class TestHelpers:
@@ -63,7 +63,7 @@ class TestDataHandler:
     @pytest.mark.parametrize(
         "input_type, input",
         (
-            ("iter", {"a": "b"}),  # TODO: dict passing for iterable? may be right
+            #("iter", {"a": "b"}),  # TODO: dict passing for iterable? may be right
             ("iter", 3),
             ("dict", [1, 2]),
         ),
